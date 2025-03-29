@@ -12,12 +12,12 @@ interface SignInModalProps {
 }
 
 export default function SignInModal({ onClose }: SignInModalProps) {
-  const [session, setSession] = useState<Session | null>(null);
+  // const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
     // Check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+      // setSession(session);
       if (session) {
         console.log("session", session);
 
@@ -29,7 +29,7 @@ export default function SignInModal({ onClose }: SignInModalProps) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+      // setSession(session);
       if (session) {
         console.log("session sub", session);
 
@@ -40,12 +40,15 @@ export default function SignInModal({ onClose }: SignInModalProps) {
     return () => subscription.unsubscribe();
   }, [onClose]);
 
-  const clickOutside = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-    // e.stopPropagation();
-  }, []);
+  const clickOutside = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target === e.currentTarget) {
+        onClose();
+      }
+      // e.stopPropagation();
+    },
+    [onClose]
+  );
 
   return (
     <div

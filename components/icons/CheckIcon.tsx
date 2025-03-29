@@ -17,4 +17,6 @@ const CheckIcon = memo(() => {
   );
 });
 
+CheckIcon.displayName = "CheckIcon";
+
 export default CheckIcon;

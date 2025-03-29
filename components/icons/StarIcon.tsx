@@ -23,4 +23,6 @@ const StarIcon = memo(({ isFilled }: Props) => {
   );
 });
 
+StarIcon.displayName = "StarIcon";
+
 export default StarIcon;
