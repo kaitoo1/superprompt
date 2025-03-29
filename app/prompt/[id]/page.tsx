@@ -34,7 +34,7 @@ const PromptPage = memo(() => {
           </button>
         </div>
       ) : prompt ? (
-        <PromptDetail prompt={prompt} onBack={handleBack} />
+        <PromptDetail prompt={prompt} />
       ) : null}
     </Layout>
   );
