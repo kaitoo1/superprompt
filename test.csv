@@ -1,0 +1,3 @@
+title,description,prompt,ai_type,specific_tool,tags,user_id,upvotes,copy_count,is_top_pick
+"Test Prompt","A sample prompt for testing","Act as a friendly guide and help me learn coding","General LLM","ChatGPT","{General LLM,Education}",,5,3,false
+"Code Helper","Generate clean code","Write a Python function to sort a list","Code Generation",,"{Code,Python}",,2,1,false
