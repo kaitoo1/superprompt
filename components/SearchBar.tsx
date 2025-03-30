@@ -23,7 +23,7 @@ const SearchBar: React.FC = () => {
       <div className="relative max-w-5xl mx-auto">
         <input
           type="text"
-          placeholder="Find a prompt for ChatGPT, Grok, and more..."
+          placeholder="What do you want to do?"
           className="w-full py-4 px-4 sm:py-5 sm:px-8 bg-zinc-800 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg shadow-lg"
           value={searchQuery}
           onChange={handleInputChange}
