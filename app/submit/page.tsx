@@ -6,13 +6,17 @@ import Layout from "../../components/HomePage";
 import SubmitPromptForm from "../../components/SubmitPromptForm";
 import { useEffect } from "react";
 
+const AUTHORIZED_USER_ID = "21a024e3-2be8-4762-b61b-17217f4936f0";
+
 export default function SubmitPage() {
   const { user, loading } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    // Redirect to home if user is not logged in and we've checked auth status
-    if (!loading && !user) {
+    // Redirect to home if:
+    // 1. We've checked auth status (not loading) AND
+    // 2. Either user is not logged in OR user ID doesn't match authorized ID
+    if (!loading && (!user || user.id !== AUTHORIZED_USER_ID)) {
       router.push("/");
     }
   }, [user, loading, router]);
@@ -37,12 +41,13 @@ export default function SubmitPage() {
     );
   }
 
-  // If user is not logged in, this will redirect (see useEffect)
-  if (!user) {
+  // If user is not authorized, show access denied message
+  // This will only briefly show before redirect happens
+  if (!user || user.id !== AUTHORIZED_USER_ID) {
     return (
       <Layout>
         <div className="text-center py-12">
-          <p>You must be signed in to submit a prompt.</p>
+          <p className="text-red-400">Access denied.</p>
         </div>
       </Layout>
     );
