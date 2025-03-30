@@ -13,6 +13,8 @@ export interface Prompt {
   created_at: string;
   is_favorited: boolean;
   slug: string;
+  output_preview: string[];
+  favorite_count: number;
 }
 
 export interface Profile {

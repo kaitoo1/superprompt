@@ -2,12 +2,18 @@
 
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { usePrompts } from "../contexts/PromptsContext";
-import { useUser } from "../contexts/UserContext";
+
+type Category = {
+  name: string;
+  filter: string;
+  icon: string;
+  disabled?: boolean;
+  comingSoon?: boolean;
+};
 
 // Define the categories with icons, colors, and filter values
-export const CATEGORIES = [
+export const CATEGORIES: Category[] = [
   {
     name: "Image Generation",
     filter: "image-generation",
@@ -147,7 +153,6 @@ const CategoryTiles: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { activeFilter, setActiveFilter } = usePrompts();
-  const { user } = useUser();
   const [expanded, setExpanded] = useState(false);
   const expandedContentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
@@ -199,7 +204,7 @@ const CategoryTiles: React.FC = () => {
 
   // Render a category tile
   const renderCategoryTile = useCallback(
-    (category: (typeof CATEGORIES)[0], index: number) => {
+    (category: (typeof CATEGORIES)[0]) => {
       const isActive = activeFilter === category.filter && !category.disabled;
       const isDisabled = category.disabled;
 

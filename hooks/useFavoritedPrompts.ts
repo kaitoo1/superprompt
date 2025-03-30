@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../lib/supabase";
+import { Prompt } from "@/types/database";
 
 async function fetchFavoritedPrompts(userId: string | undefined) {
   if (!userId) {
@@ -16,9 +17,14 @@ async function fetchFavoritedPrompts(userId: string | undefined) {
     throw error;
   }
 
+  console.log("Favorited prompts:", data);
+
+  // ✅ Cast each item as { prompt: Prompt }
+  const typedData = (data ?? []) as unknown as { prompt: Prompt }[];
+
   // Extract the prompt data from the joined results
   return (
-    data?.map((item) => ({
+    typedData.map((item) => ({
       ...item.prompt,
       is_favorited: true,
     })) || []

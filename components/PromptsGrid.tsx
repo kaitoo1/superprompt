@@ -4,7 +4,6 @@ import { usePrompts } from "@/contexts/PromptsContext";
 import { Grid } from "react-virtualized";
 import { AutoSizer } from "react-virtualized";
 import { WindowScroller } from "react-virtualized";
-import { InfiniteLoader } from "react-virtualized";
 import PromptCard from "./PromptCard";
 
 type Props = {
@@ -13,7 +12,7 @@ type Props = {
   error: Error | null;
 };
 
-const PromptsGrid = memo(({ prompts, isLoading, error }: Props) => {
+const PromptsGrid = memo(({ prompts, isLoading }: Props) => {
   const { searchQuery } = usePrompts();
 
   // Calculate grid dimensions based on viewport width
@@ -70,9 +69,6 @@ const PromptsGrid = memo(({ prompts, isLoading, error }: Props) => {
     const isFirstColumn = columnIndex === 0;
     const isLastColumn = columnIndex === columnCount - 1;
 
-    // No top padding for first row, we'll handle bottom padding for all
-    const isFirstRow = rowIndex === 0;
-
     // Create padding style with smart gaps
     const paddingStyle = {
       paddingLeft: isFirstColumn ? 0 : "0.75rem",
@@ -124,66 +120,63 @@ const PromptsGrid = memo(({ prompts, isLoading, error }: Props) => {
 
       {prompts.length > 0 && (
         <div style={{ height: "calc(100vh - 200px)", width: "100%" }}>
-          <InfiniteLoader
+          {/* <InfiniteLoader
             // isRowLoaded={({ index }) => isItemLoaded(index)}
             // loadMoreRows={loadMoreItems}
             rowCount={prompts.length + 1}
-          >
-            {({ onRowsRendered, registerChild }) => (
-              <WindowScroller>
-                {({ height, scrollTop }) => (
-                  <AutoSizer disableHeight>
-                    {({ width }) => {
-                      const { columnCount, rowCount } =
-                        calculateGridDimensions(width);
-                      const cellHeight = 390;
+          > */}
+          {/* {({ onRowsRendered, registerChild }) => ( */}
+          <WindowScroller>
+            {({ height, scrollTop }) => (
+              <AutoSizer disableHeight>
+                {({ width }) => {
+                  const { columnCount, rowCount } =
+                    calculateGridDimensions(width);
+                  const cellHeight = 390;
 
-                      return (
-                        <Grid
-                          ref={registerChild}
-                          autoHeight
-                          height={height}
-                          width={width}
-                          scrollTop={scrollTop}
-                          columnCount={columnCount}
-                          columnWidth={width / columnCount}
-                          rowCount={rowCount}
-                          rowHeight={cellHeight}
-                          cellRenderer={({
-                            columnIndex,
-                            rowIndex,
-                            key,
-                            style,
-                          }) =>
-                            cellRenderer({
-                              columnIndex,
-                              rowIndex,
-                              key,
-                              style,
-                              width,
-                            })
-                          }
-                          onSectionRendered={({
-                            rowStartIndex,
-                            rowStopIndex,
-                          }) => {
-                            const startIndex = rowStartIndex * columnCount;
-                            const stopIndex =
-                              rowStopIndex * columnCount + (columnCount - 1);
-                            // onRowsRendered({ startIndex, stopIndex });
-                          }}
-                        />
-                      );
-                    }}
-                  </AutoSizer>
-                )}
-              </WindowScroller>
+                  return (
+                    <Grid
+                      // ref={registerChild}
+                      autoHeight
+                      height={height}
+                      width={width}
+                      scrollTop={scrollTop}
+                      columnCount={columnCount}
+                      columnWidth={width / columnCount}
+                      rowCount={rowCount}
+                      rowHeight={cellHeight}
+                      cellRenderer={({ columnIndex, rowIndex, key, style }) =>
+                        cellRenderer({
+                          columnIndex,
+                          rowIndex,
+                          key,
+                          style,
+                          width,
+                        })
+                      }
+                      // onSectionRendered={({
+                      //   rowStartIndex,
+                      //   rowStopIndex,
+                      // }) => {
+                      //   const startIndex = rowStartIndex * columnCount;
+                      //   const stopIndex =
+                      //     rowStopIndex * columnCount + (columnCount - 1);
+                      //   // onRowsRendered({ startIndex, stopIndex });
+                      // }}
+                    />
+                  );
+                }}
+              </AutoSizer>
             )}
-          </InfiniteLoader>
+          </WindowScroller>
+          {/* )} */}
+          {/* </InfiniteLoader> */}
         </div>
       )}
     </>
   );
 });
+
+PromptsGrid.displayName = "PromptsGrid";
 
 export default PromptsGrid;

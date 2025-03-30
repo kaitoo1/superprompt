@@ -7,11 +7,7 @@ import { usePrompts } from "../contexts/PromptsContext";
 // Define the categories we want to display
 const CATEGORIES = ["Coding", "Coach", "Travel", "Nutrition"];
 
-interface FilterPillsProps {
-  // You can add additional props if needed
-}
-
-const FilterPills: React.FC<FilterPillsProps> = () => {
+const FilterPills: React.FC = () => {
   const { user } = useUser();
   const { activeFilter, setActiveFilter } = usePrompts();
 

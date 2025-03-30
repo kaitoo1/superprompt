@@ -5,7 +5,7 @@ import { Prompt } from "../types/database";
 import { useUser } from "../contexts/UserContext";
 import { useToggleFavorite } from "@/hooks/useToggleFavorite";
 import { useFavoritedPrompts } from "@/hooks/useFavoritedPrompts";
-import { DecoratedPrompt } from "./DecoratedPrompt";
+import DecoratedPrompt from "./DecoratedPrompt";
 import { useRouter } from "next/navigation";
 import LeftArrowIcon from "./icons/LeftArrowIcon";
 import StarIcon from "./icons/StarIcon";
@@ -54,10 +54,10 @@ const PromptDetail = memo(({ prompt }: PromptDetailProps) => {
       toggleFavorite({
         userId: user?.id,
         promptId: prompt.id,
-        isCurrentlyFavorited: isFavorited,
+        isCurrentlyFavorited: isFavorited || false,
       });
     },
-    [toggleFavorite, prompt.id, isFavorited, user?.id]
+    [user?.id, toggleFavorite, prompt.id, isFavorited, setIsSignInModalOpen]
   );
 
   const hasOutputPreview = prompt.output_preview.length > 0;
@@ -93,11 +93,11 @@ const PromptDetail = memo(({ prompt }: PromptDetailProps) => {
                     : "h-full flex-1"
                 } overflow-hidden rounded`}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imageUrl}
                   alt={`Output preview for ${prompt.title}`}
                   className="h-full w-full object-contain"
-                  // onError={() => handleImageError(imageUrl)}
                 />
               </div>
             ))}

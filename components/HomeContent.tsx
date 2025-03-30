@@ -3,22 +3,15 @@
 import { useCallback, useMemo } from "react";
 
 import { useUser } from "../contexts/UserContext";
-import {
-  InfiniteLoader,
-  WindowScroller,
-  AutoSizer,
-  Grid,
-} from "react-virtualized";
 import SearchBar from "./SearchBar";
-import PromptCard from "./PromptCard";
 import { usePrompts } from "@/contexts/PromptsContext";
 import { usePromptsData } from "@/hooks/usePrompts";
 import { useFavoritedPrompts } from "@/hooks/useFavoritedPrompts";
 import CategoryTiles, { CATEGORIES } from "./CategoryTiles";
 import PromptsGrid from "./PromptsGrid";
+import { Prompt } from "@/types/database";
 
 export default function HomeContent() {
-  const ITEMS_PER_PAGE = 12;
   const { user } = useUser();
 
   const { searchQuery, activeFilter } = usePrompts();
@@ -28,7 +21,7 @@ export default function HomeContent() {
     activeFilter
   );
   const { data: favoritedPrompts } = useFavoritedPrompts(user?.id);
-  const prompts = data ?? [];
+  const prompts = useMemo(() => data ?? [], [data]);
   const promptsWithFavoritesMarked = useMemo(() => {
     return prompts.map((prompt) => ({
       ...prompt,
@@ -45,14 +38,14 @@ export default function HomeContent() {
         : [];
     }
     return promptsWithFavoritesMarked;
-  }, [activeFilter, promptsWithFavoritesMarked]);
+  }, [activeFilter, favoritedPrompts, promptsWithFavoritesMarked]);
 
   const handleRetry = useCallback(() => {
     refetch();
   }, [refetch]);
 
   const categoryNameMap = useMemo(() => {
-    const filterMap = {};
+    const filterMap: Record<string, string> = {};
 
     CATEGORIES.forEach((category) => {
       filterMap[category.filter] = category.name;
@@ -60,10 +53,6 @@ export default function HomeContent() {
 
     return filterMap;
   }, []);
-
-  const categoryName = useMemo(() => {
-    return CATEGORIES.find((c) => c.filter === activeFilter)?.name;
-  }, [activeFilter]);
 
   const headingText = activeFilter ? categoryNameMap[activeFilter] : "Popular";
 
@@ -91,7 +80,7 @@ export default function HomeContent() {
       )}
 
       <PromptsGrid
-        prompts={promptsToDisplay}
+        prompts={promptsToDisplay as Prompt[]}
         isLoading={isLoading}
         error={error}
       />

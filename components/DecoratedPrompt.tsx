@@ -8,7 +8,7 @@ type DecoratedPromptProps = {
   displayMode: "preview" | "full";
 };
 
-export const DecoratedPrompt: React.FC<DecoratedPromptProps> = memo(
+const DecoratedPrompt: React.FC<DecoratedPromptProps> = memo(
   ({ prompt, displayMode = "preview" }) => {
     const renderPromptWithVariables = useCallback((promptText: string) => {
       const parts = [];
@@ -63,3 +63,7 @@ export const DecoratedPrompt: React.FC<DecoratedPromptProps> = memo(
     );
   }
 );
+
+DecoratedPrompt.displayName = "DecoratedPrompt";
+
+export default DecoratedPrompt;

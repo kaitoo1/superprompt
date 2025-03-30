@@ -12,14 +12,11 @@ export default function AboutPage() {
         {/* Intro */}
         <section className="mb-24">
           <div className="text-white space-y-6">
-            {/* <h2 className="text-2xl md:text-3xl font-light leading-snug">
-              If you're unsure what to say to AI—or feel like you’re not tapping
-              its full potential, I made this app for you.
-            </h2> */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://i.imgur.com/Nvom102.jpeg"
               alt="doge"
-              className="rounded-md mx-auto max-w-120"
+              className="rounded-md mx-auto max-w-120 w-full"
             />
             <p className="text-lg md:text-xl font-light text-zinc-300 leading-relaxed">
               You’ve probably tried ChatGPT or seen viral AI photos. Everyone’s

@@ -5,7 +5,7 @@ import { Prompt } from "../types/database";
 import { useRouter } from "next/navigation";
 import { useToggleFavorite } from "@/hooks/useToggleFavorite";
 import { useUser } from "@/contexts/UserContext";
-import { DecoratedPrompt } from "./DecoratedPrompt";
+import DecoratedPrompt from "./DecoratedPrompt";
 import CheckIcon from "./icons/CheckIcon";
 import StarIcon from "./icons/StarIcon";
 import TagPill from "./TagPill";
@@ -32,7 +32,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
 
   const handleCardClick = useCallback(() => {
     router.push(`/prompt/${prompt.slug}`);
-  }, [prompt.slug]);
+  }, [prompt.slug, router]);
 
   const { mutate: toggleFavorite } = useToggleFavorite();
 
@@ -50,7 +50,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
         isCurrentlyFavorited: prompt.is_favorited,
       });
     },
-    [toggleFavorite, prompt.id, prompt.is_favorited, setIsSignInModalOpen]
+    [user, toggleFavorite, prompt.id, prompt.is_favorited, setIsSignInModalOpen]
   );
 
   const hasOutputPreview =
@@ -76,7 +76,6 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
 
       {/* Scrollable Prompt Area with Copy Button */}
       {hasOutputPreview ? (
-        // <div>
         <div
           className={`h-44 w-full flex ${
             prompt.output_preview.length === 1 ? "justify-center" : "space-x-2"
@@ -89,17 +88,16 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
                 prompt.output_preview.length === 1 ? "h-full" : "h-full flex-1"
               } overflow-hidden rounded`}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageUrl}
                 alt={`Output preview for ${prompt.title}`}
                 className="h-full w-full object-cover"
-                // onError={() => handleImageError(imageUrl)}
               />
             </div>
           ))}
         </div>
       ) : (
-        // </div>
         <div className="relative">
           <div onClick={limitPromptClick} className="cursor-text">
             <DecoratedPrompt prompt={prompt.prompt} displayMode="preview" />
@@ -163,4 +161,5 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
   );
 });
 
+PromptCard.displayName = "PromptCard";
 export default PromptCard;

@@ -5,7 +5,7 @@ interface PromptsContextType {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   activeFilter: string | null;
-  setActiveFilter: (filter: string | null) => void;
+  setActiveFilter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const PromptsContext = createContext<PromptsContextType | undefined>(undefined);
