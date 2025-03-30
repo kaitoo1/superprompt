@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { Suspense, useCallback, useMemo } from "react";
 
 import { useUser } from "../contexts/UserContext";
 import SearchBar from "./SearchBar";
@@ -59,7 +59,11 @@ export default function HomeContent() {
   return (
     <>
       <SearchBar />
-      {!searchQuery && <CategoryTiles />}
+      {!searchQuery && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <CategoryTiles />
+        </Suspense>
+      )}
       {!searchQuery && (
         <h2 className="text-xl font-semibold mb-6 text-white capitalize">
           {headingText}
