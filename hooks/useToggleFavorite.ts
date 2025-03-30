@@ -52,6 +52,7 @@ type ToggleFavoriteResult = {
 
 type OptimisticContext = {
   previousPrompts?: Prompt[];
+  previousFavorites?: Prompt[];
 };
 
 export function useToggleFavorite() {
@@ -68,37 +69,95 @@ export function useToggleFavorite() {
     mutationFn: ({ userId, promptId, isCurrentlyFavorited }) =>
       toggleFavorite({ userId, promptId, isCurrentlyFavorited }),
     onMutate: async ({ promptId, isCurrentlyFavorited }) => {
-      console.log("onMutate");
-      // ✅ Optimistically update the UI
-      const queryKey = ["prompts", userId];
-      await queryClient.cancelQueries({ queryKey }); // Cancel ongoing queries
-      const previousPrompts = queryClient.getQueryData<Prompt[]>([
-        "prompts",
-        userId,
+      if (!userId) return;
+
+      // Cancel both queries
+      const promptsKey = ["prompts", "", null, userId]; // Adjust if using search/filter
+      const favoritedKey = ["favorited-prompts", userId];
+      await Promise.all([
+        queryClient.cancelQueries({ queryKey: promptsKey }),
+        queryClient.cancelQueries({ queryKey: favoritedKey }),
       ]);
-      // Update UI with optimistic favorite state
-      queryClient.setQueryData(["prompts", userId], (oldData: Prompt[]) =>
-        oldData
-          ? oldData.map((prompt) =>
-              prompt.id === promptId
-                ? { ...prompt, isFavorited: !isCurrentlyFavorited } // Flip the favorite state
-                : prompt
-            )
-          : []
+
+      // Take a snapshot of both caches
+      const previousPrompts = queryClient.getQueryData<Prompt[]>(promptsKey);
+      const previousFavorites =
+        queryClient.getQueryData<Prompt[]>(favoritedKey);
+
+      console.log("previousPrompts", previousPrompts, previousFavorites);
+
+      // Optimistically update prompts
+      queryClient.setQueryData<Prompt[]>(promptsKey, (old = []) =>
+        old.map((p) =>
+          p.id === promptId
+            ? {
+                ...p,
+                isFavorited: !isCurrentlyFavorited,
+                favorite_count:
+                  p.favorite_count + (isCurrentlyFavorited ? -1 : 1),
+              }
+            : p
+        )
       );
 
-      return { previousPrompts };
+      // Optimistically update favorited prompts
+      const toggledPrompt =
+        previousPrompts?.find((p) => p.id === promptId) ??
+        previousFavorites?.find((p) => p.id === promptId);
+
+      if (toggledPrompt) {
+        queryClient.setQueryData<Prompt[]>(favoritedKey, (old = []) => {
+          if (isCurrentlyFavorited) {
+            // Remove
+            return old.filter((p) => p.id !== promptId);
+          } else {
+            // Add
+            return [...old, { ...toggledPrompt, isFavorited: true }];
+          }
+        });
+      }
+
+      // Optimistically update single prompt cache (["prompt", slug])
+      queryClient.setQueriesData<Prompt>({ queryKey: ["prompt"] }, (data) => {
+        if (!data || data.id !== promptId) return data;
+        return {
+          ...data,
+          isFavorited: !isCurrentlyFavorited,
+          favorite_count: data.favorite_count + (isCurrentlyFavorited ? -1 : 1),
+        };
+      });
+
+      return {
+        previousPrompts,
+        previousFavorites,
+      };
     },
+
     onSuccess: () => {
-      // ✅ Refetch updated favorites after toggling
-      queryClient.invalidateQueries({ queryKey: ["favorites", userId] });
-      queryClient.invalidateQueries({ queryKey: ["prompts", userId] });
+      // Ensure latest state from server
+      if (userId) {
+        queryClient.invalidateQueries({
+          queryKey: ["prompts", undefined, null, userId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["favorited-prompts", userId],
+        });
+        queryClient.invalidateQueries({ queryKey: ["favorites", userId] });
+      }
     },
-    onError: (error, _variables, context) => {
-      console.error("Failed to toggle favorite:", error);
-      // Rollback UI to previous state
+    onError: (_err, _vars, context) => {
+      if (!userId) return;
       if (context?.previousPrompts) {
-        queryClient.setQueryData(["prompts", userId], context.previousPrompts);
+        queryClient.setQueryData(
+          ["prompts", undefined, null, userId],
+          context.previousPrompts
+        );
+      }
+      if (context?.previousFavorites) {
+        queryClient.setQueryData(
+          ["favorited-prompts", userId],
+          context.previousFavorites
+        );
       }
     },
   });

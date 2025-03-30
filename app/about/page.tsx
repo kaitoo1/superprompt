@@ -21,7 +21,7 @@ export default function AboutPage() {
             <p className="text-lg md:text-xl font-light text-zinc-300 leading-relaxed">
               You’ve probably tried ChatGPT or seen viral AI photos. Everyone’s
               bragging about how they used it to land a job, plan a trip, or
-              create something insane—and you’re thinking:
+              create something insane—and you’re thinking:{" "}
               <span className="font-medium text-[#FBC918]">
                 “What did you type in to get that?”
               </span>
