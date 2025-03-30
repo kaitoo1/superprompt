@@ -6,7 +6,6 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../lib/supabase";
 
 interface SignInModalProps {
-  isOpen: boolean;
   onCloseAction: () => void;
 }
 

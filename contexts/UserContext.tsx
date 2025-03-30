@@ -67,6 +67,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const closeSignInModal = useCallback(() => {
     setIsSignInModalOpen(false);
   }, []);
+
   const value = {
     session,
     user,
@@ -78,7 +79,7 @@ export function UserProvider({ children }: UserProviderProps) {
   return (
     <UserContext.Provider value={value}>
       {children}
-      {isSignInModalOpen && <SignInModal onClose={closeSignInModal} />}
+      {isSignInModalOpen && <SignInModal onCloseAction={closeSignInModal} />}
     </UserContext.Provider>
   );
 }

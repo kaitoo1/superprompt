@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useUser } from "../contexts/UserContext";
 
@@ -30,15 +30,18 @@ const HomePage: React.FC<HomePageProps> = ({ children }) => {
     };
   }, []);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = useCallback(() => {
     setDropdownOpen(!dropdownOpen);
-  };
+  }, [dropdownOpen]);
 
-  const handleSignOut = async () => {
+  const handleSignOut = useCallback(async () => {
     await signOut();
     setDropdownOpen(false);
-  };
+  }, [signOut]);
 
+  const handleSignInClick = useCallback(() => {
+    setIsSignInModalOpen(true);
+  }, [setIsSignInModalOpen]);
   return (
     <div className="min-h-screen bg-black text-white">
       <header className=" py-4 px-6 shadow-md ">
@@ -94,7 +97,7 @@ const HomePage: React.FC<HomePageProps> = ({ children }) => {
               </div>
             ) : (
               <button
-                onClick={setIsSignInModalOpen}
+                onClick={handleSignInClick}
                 className="block w-full text-left px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
               >
                 Sign In
