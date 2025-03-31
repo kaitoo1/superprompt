@@ -16,7 +16,7 @@ type Category = {
 export const CATEGORIES: Category[] = [
   {
     name: "Image Generation",
-    filter: "image-generation",
+    filter: "image generation",
     icon: "🎨",
   },
   {
@@ -46,7 +46,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     name: "Writing Help",
-    filter: "writing-help",
+    filter: "writing help",
     icon: "✍️",
   },
   {
@@ -66,7 +66,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     name: "Language Coaching",
-    filter: "language-coaching",
+    filter: "language coaching",
     icon: "🗣️",
   },
   {
@@ -76,7 +76,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     name: "Event Planning",
-    filter: "event-planning",
+    filter: "event planning",
     icon: "🎉",
   },
   // {
@@ -101,7 +101,7 @@ export const CATEGORIES: Category[] = [
   // },
   {
     name: "Personal Finance",
-    filter: "personal-finance",
+    filter: "personal finance",
     icon: "💰",
   },
   // {
@@ -140,7 +140,7 @@ export const CATEGORIES: Category[] = [
 const USER_CATEGORIES = [
   {
     name: "My Prompts",
-    filter: "my-prompts",
+    filter: "my prompts",
     icon: "📝",
     color: "bg-zinc-500",
     disabled: true,
@@ -161,7 +161,7 @@ const CategoryTiles: React.FC = () => {
   useEffect(() => {
     const categoryParam = searchParams.get("category");
     if (categoryParam) {
-      setActiveFilter(categoryParam);
+      setActiveFilter(categoryParam.replace(/-/g, " "));
     }
   }, [searchParams, setActiveFilter]);
 
@@ -183,7 +183,8 @@ const CategoryTiles: React.FC = () => {
       // Update URL search params
       const params = new URLSearchParams(searchParams.toString());
       if (newFilter) {
-        params.set("category", newFilter);
+        const formattedFilter = newFilter.replace(/\s+/g, "-");
+        params.set("category", formattedFilter);
       } else {
         params.delete("category");
       }

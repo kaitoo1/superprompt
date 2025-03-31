@@ -71,10 +71,10 @@ const PromptsGrid = memo(({ prompts, isLoading }: Props) => {
 
     // Create padding style with smart gaps
     const paddingStyle = {
-      paddingLeft: isFirstColumn ? 0 : "0.75rem",
-      paddingRight: isLastColumn ? 0 : "0.75rem",
+      paddingLeft: isFirstColumn ? 0 : "1rem",
+      paddingRight: isLastColumn ? 0 : "1rem",
       paddingTop: 0,
-      paddingBottom: "1.5rem", // Always add bottom padding for vertical spacing
+      paddingBottom: "2rem", // Always add bottom padding for vertical spacing
     };
 
     return (

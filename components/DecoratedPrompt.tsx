@@ -54,7 +54,7 @@ const DecoratedPrompt: React.FC<DecoratedPromptProps> = memo(
 
     return (
       <div
-        className={`bg-zinc-900 rounded-md p-3 overflow-y-auto text-zinc-300 text-sm font-mono whitespace-pre-wrap max-h-120 pb-16 ${
+        className={`bg-zinc-900 rounded-md p-3 overflow-y-auto text-zinc-400 text-sm font-mono whitespace-pre-wrap max-h-120 pb-16 ${
           displayMode === "preview" ? "h-44" : ""
         }`}
       >

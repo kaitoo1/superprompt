@@ -24,6 +24,7 @@ export const usePromptsData = (
       // Apply tag filter if provided (and not "favorites" which is handled separately)
       if (activeFilter && activeFilter !== "favorites") {
         // For case-insensitive tag matching, we'll convert both to lowercase
+
         const lowerCaseFilter = activeFilter;
 
         // Use a raw SQL query with ILIKE for case-insensitive matching
