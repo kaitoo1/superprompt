@@ -11,6 +11,7 @@ import LeftArrowIcon from "./icons/LeftArrowIcon";
 import StarIcon from "./icons/StarIcon";
 import TagPill from "./TagPill";
 import { copyTextToClipboard } from "@/lib/clipboard";
+import CustomMarkdown from "./CustomMarkdown";
 
 interface PromptDetailProps {
   prompt: Prompt;
@@ -76,6 +77,12 @@ const PromptDetail = memo(({ prompt }: PromptDetailProps) => {
       <div className="bg-zinc-800 rounded-lg flex flex-col space-y-4 p-6 pb-2 mb-6">
         <h2 className="text-2xl font-bold">{prompt.title}</h2>
         <p className="text-zinc-300 mb-6">{prompt.description}</p>
+        {prompt.source && (
+          <div className="flex flex-row space-x-1 mb-4">
+            <p className="text-zinc-400   font-italic">Idea from</p>
+            <CustomMarkdown>{prompt.source}</CustomMarkdown>
+          </div>
+        )}
         {hasOutputPreview && (
           <div
             className={`h-80 w-full flex ${

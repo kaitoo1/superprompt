@@ -15,6 +15,7 @@ export interface Prompt {
   slug: string;
   output_preview: string[];
   favorite_count: number;
+  source?: string;
 }
 
 export interface Profile {
