@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Layout from "../../components/HomePage";
 
-export default function AboutPage() {
+export default async function AboutPage() {
   return (
     <Layout>
       <div className="max-w-3xl mx-auto px-6 py-16">

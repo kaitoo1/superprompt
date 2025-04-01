@@ -16,9 +16,22 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "SuperPrompt",
   description: "Find the best prompts for ChatGPT, Grok, and more.",
+  keywords: [
+    "ChatGPT prompts",
+    "how to use ChatGPT",
+    "AI prompt guide",
+    "best prompts for ChatGPT",
+    "prompt examples",
+    "AI resume help",
+    "Midjourney prompts",
+    "productivity with AI",
+    "learn prompt engineering",
+    "SuperPrompt",
+  ],
   openGraph: {
-    title: "SuperPrompt",
+    title: "SuperPrompt – Get Better Results from AI",
     description: "Find better prompts for better results",
+
     url: "https://www.superprompt.tips",
     type: "website",
     images: [
@@ -29,6 +42,10 @@ export const metadata: Metadata = {
         alt: "SuperPrompt",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["https://www.superprompt.tips/og-image.png"],
   },
 };
 

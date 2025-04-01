@@ -17,7 +17,8 @@ interface PromptDetailProps {
   prompt: Prompt;
 }
 
-const PromptDetail = memo(({ prompt }: PromptDetailProps) => {
+const PromptDetail = memo(({ prompt: initialPrompt }: PromptDetailProps) => {
+  const [prompt, setPrompt] = useState(initialPrompt);
   const [copySuccess, setCopySuccess] = useState(false);
   const [shareSuccess, setShareSuccess] = useState(false);
   const { user, setIsSignInModalOpen } = useUser();
@@ -52,6 +53,19 @@ const PromptDetail = memo(({ prompt }: PromptDetailProps) => {
         setIsSignInModalOpen(true);
         return;
       }
+
+      // Optimistically update local prompt retrieved from SSR
+      setPrompt((prev) => {
+        const newFavoriteCount = isFavorited
+          ? prev.favorite_count - 1
+          : prev.favorite_count + 1;
+        return {
+          ...prev,
+          favorite_count: newFavoriteCount,
+        };
+      });
+
+      // Optimistically update tanstack query for prompts and favorites queries
       toggleFavorite({
         userId: user?.id,
         promptId: prompt.id,
