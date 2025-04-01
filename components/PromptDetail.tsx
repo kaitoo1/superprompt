@@ -74,9 +74,9 @@ const PromptDetail = memo(({ prompt }: PromptDetailProps) => {
         </button>
       </div>
 
-      <div className="bg-zinc-800 rounded-lg flex flex-col space-y-4 p-6 pb-2 mb-6">
+      <div className="bg-zinc-900 rounded-lg flex flex-col space-y-4 p-6 pb-2 mb-6">
         <h2 className="text-2xl font-bold">{prompt.title}</h2>
-        <p className="text-zinc-300 mb-6">{prompt.description}</p>
+        <p className="text-zinc-400 mb-6">{prompt.description}</p>
         {prompt.source && (
           <div className="flex flex-row space-x-1 mb-4">
             <p className="text-zinc-400   font-italic">Idea from</p>
@@ -114,7 +114,7 @@ const PromptDetail = memo(({ prompt }: PromptDetailProps) => {
           <DecoratedPrompt prompt={prompt.prompt} displayMode="full" />
           <button
             onClick={handleCopy}
-            className="absolute w-38 bottom-2 right-2 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-500 hover:cursor-pointer flex-1 sm:w-40 justify-center transition-colors flex items-center gap-2"
+            className="absolute bottom-2 right-2 px-4 py-2 rounded-md bg-green-700 hover:from-blue-600 hover:to-purple-600 text-white flex-1 sm:w-40 justify-center transition-all flex items-center gap-2 shadow-md"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -30,7 +30,7 @@ const DecoratedPrompt: React.FC<DecoratedPromptProps> = memo(
           parts.push(`{${varContent}}`);
         } else {
           parts.push(
-            <span key={match.index} className="text-orange-400">
+            <span key={match.index} className="text-[#9CDC2D]">
               {`{${varContent}}`}
             </span>
           );
@@ -54,8 +54,8 @@ const DecoratedPrompt: React.FC<DecoratedPromptProps> = memo(
 
     return (
       <div
-        className={`bg-zinc-900 rounded-md p-3 overflow-y-auto text-zinc-400 text-sm font-mono whitespace-pre-wrap max-h-120 pb-16 ${
-          displayMode === "preview" ? "h-44" : ""
+        className={`bg-black rounded-md p-6  overflow-y-auto text-zinc-500 text-sm font-mono whitespace-pre-wrap max-h-120 pb-16 italic ${
+          displayMode === "preview" ? "h-36" : ""
         }`}
       >
         {rendered}

@@ -213,14 +213,15 @@ const CategoryTiles: React.FC = () => {
         <button
           key={category.name}
           onClick={() => handleCategoryClick(category.filter, isDisabled)}
-          className={`hover:cursor-pointer sm:h-24 flex flex-row sm:flex-col items-center sm:justify-center py-2 px-3 sm:p-4 rounded-lg transition-colors border ${
+          className={`hover:cursor-pointer sm:h-24 flex flex-row sm:flex-col items-center sm:justify-center py-2 px-3 sm:p-4 rounded-lg transition-colors  ${
             isDisabled
               ? "bg-zinc-800/50 border-zinc-700/50 cursor-default opacity-70"
               : isActive
-              ? `bg-zinc-500/20 border-zinc-500
+              ? `bg-zinc-500/20 border-zinc-500 border border-2
                 )}/50 text-zinc-300`
-              : "bg-zinc-800 hover:bg-zinc-700 border-zinc-700 hover:border-zinc-600"
+              : "bg-zinc-900 hover:bg-zinc-700  hover:border-zinc-600"
           }`}
+          // bg-gradient-to-r from-[#1E221F] to-[#616B64]
         >
           <span
             className={`text-xl sm:text-2xl sm:mb-2 mr-2 sm:mr-0 ${

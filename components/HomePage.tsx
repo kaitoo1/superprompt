@@ -46,8 +46,11 @@ const HomePage: React.FC<HomePageProps> = ({ children }) => {
     <div className="min-h-screen bg-black text-white">
       <header className=" py-4 px-6 shadow-md ">
         <div className="container mx-auto flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-white">
-            SuperPrompt
+          <Link
+            href="/"
+            className="text-2xl font-bold text-white tracking-wide"
+          >
+            SUPERPROMPT
           </Link>
           <div className="flex items-center gap-4">
             <Link

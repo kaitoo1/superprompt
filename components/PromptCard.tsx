@@ -62,13 +62,21 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
 
   return (
     <div
-      className="bg-zinc-800 rounded-lg px-6 py-4 cursor-pointer hover:bg-zinc-700 transition-colors h-full flex flex-col"
+      className="bg-zinc-900 rounded-lg px-6 py-6 cursor-pointer hover:bg-zinc-700 transition-colors h-full flex flex-col"
       onClick={handleCardClick}
     >
-      <div className="flex flex-col space-y-1 px-1">
+      <div className="flex flex-col space-y-2 px-1">
         <h3 className="text-xl font-semibold line-clamp-2">{prompt.title}</h3>
-        <div className="flex flex-col min-h-20  ">
-          <p className="text-zinc-300 text-md line-clamp-3">
+        <div
+          className={`flex flex-col    ${
+            hasOutputPreview ? "min-h-21" : "min-h-26"
+          }`}
+        >
+          <p
+            className={`text-zinc-400 text-sm ${
+              hasOutputPreview ? "line-clamp-3" : "line-clamp-4"
+            }`}
+          >
             {prompt.description}
           </p>
         </div>
@@ -77,7 +85,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
       {/* Scrollable Prompt Area with Copy Button */}
       {hasOutputPreview ? (
         <div
-          className={`h-44 w-full flex ${
+          className={`max-h-41 h-41 w-full flex ${
             prompt.output_preview.length === 1 ? "justify-center" : "space-x-2"
           }`}
         >
@@ -85,7 +93,9 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
             <div
               key={index}
               className={`${
-                prompt.output_preview.length === 1 ? "h-full" : "h-full flex-1"
+                prompt.output_preview.length === 1
+                  ? "h-full flex-1"
+                  : "h-full flex-1"
               } overflow-hidden rounded`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

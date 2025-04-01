@@ -56,7 +56,7 @@ export default function SignInModal({ onCloseAction }: SignInModalProps) {
           ✕
         </button>
         <h2 className="text-xl font-bold mb-6 text-center text-white">
-          Sign In to SuperPrompt
+          Sign In to favorite prompts
         </h2>
 
         <Auth
