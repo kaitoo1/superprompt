@@ -4,11 +4,10 @@ import { getPrompt } from "@/lib/promptCache";
 import { Prompt } from "@/types/database";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>; // Updated type to reflect that params is a Promise
 };
-
 // Generate metadata from prompt data
 function generatePromptMetadata(prompt: Prompt) {
   if (!prompt) {
@@ -27,9 +26,13 @@ function generatePromptMetadata(prompt: Prompt) {
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props) {
-  const prompt = await getPrompt(params.slug);
+  const awaitedParams = await params;
+  const { slug } = awaitedParams;
+
+  const prompt = await getPrompt(slug);
   return generatePromptMetadata(prompt);
 }
+
 // Server Component for SSR
 export default async function PromptPage({ params }: Props) {
   const awaitedParams = await params;
