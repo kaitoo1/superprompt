@@ -4,6 +4,7 @@ import "./globals.css";
 import { UserProvider } from "../contexts/UserContext";
 import ClientLayout from "./client-layout";
 import { PromptsProvider } from "@/contexts/PromptsContext";
+import { Analytics } from "@vercel/analytics/react";
 
 import { Inter } from "next/font/google";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
             <PromptsProvider>{children}</PromptsProvider>
           </ClientLayout>
         </UserProvider>
+        <Analytics />
       </body>
     </html>
   );
