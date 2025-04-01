@@ -138,14 +138,14 @@ export const CATEGORIES: Category[] = [
 
 // User-specific categories
 const USER_CATEGORIES = [
-  {
-    name: "My Prompts",
-    filter: "my prompts",
-    icon: "📝",
-    color: "bg-zinc-500",
-    disabled: true,
-    comingSoon: true,
-  },
+  // {
+  //   name: "My Prompts",
+  //   filter: "my prompts",
+  //   icon: "📝",
+  //   color: "bg-zinc-500",
+  //   disabled: true,
+  //   comingSoon: true,
+  // },
   { name: "Favorited", filter: "favorites", icon: "⭐", color: "bg-amber-500" },
 ];
 
