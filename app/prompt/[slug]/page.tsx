@@ -3,7 +3,7 @@ import PromptDetail from "@/components/PromptDetail";
 import { getPrompt } from "@/lib/promptCache";
 import { Prompt } from "@/types/database";
 
-type Params = {
+type Props = {
   params: {
     slug: string;
   };
@@ -26,16 +26,12 @@ function generatePromptMetadata(prompt: Prompt) {
 }
 
 // Dynamic metadata for SEO
-export async function generateMetadata({ params }: Params) {
-  const awaitedParams = await params;
-  const { slug } = awaitedParams;
-
-  const prompt = await getPrompt(slug);
+export async function generateMetadata({ params }: Props) {
+  const prompt = await getPrompt(params.slug);
   return generatePromptMetadata(prompt);
 }
-
 // Server Component for SSR
-export default async function PromptPage({ params }: Params) {
+export default async function PromptPage({ params }: Props) {
   const awaitedParams = await params;
   const { slug } = awaitedParams;
 
