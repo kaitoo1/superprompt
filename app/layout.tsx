@@ -15,6 +15,20 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "SuperPrompt",
   description: "Find the best prompts for ChatGPT, Grok, and more.",
+  openGraph: {
+    title: "SuperPrompt",
+    description: "Find better prompts for better results",
+    url: "https://www.superprompt.tips",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SuperPrompt",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
