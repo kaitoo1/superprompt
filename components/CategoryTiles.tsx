@@ -35,6 +35,16 @@ export const CATEGORIES: Category[] = [
     icon: "✉️",
   },
   {
+    name: "Gym",
+    filter: "gym",
+    icon: "🏋️",
+  },
+  {
+    name: "Writing",
+    filter: "writing",
+    icon: "✍️",
+  },
+  {
     name: "Productivity",
     filter: "productivity",
     icon: "⏰",
@@ -44,11 +54,6 @@ export const CATEGORIES: Category[] = [
   //   filter: "coding",
   //   icon: "💻",
   // },
-  {
-    name: "Writing",
-    filter: "writing",
-    icon: "✍️",
-  },
   {
     name: "Marketing",
     filter: "marketing",
@@ -66,19 +71,19 @@ export const CATEGORIES: Category[] = [
   },
   {
     name: "Language Coaching",
-    filter: "language coaching",
+    filter: "language",
     icon: "🗣️",
   },
-  {
-    name: "Negotiation",
-    filter: "negotiation",
-    icon: "🤝",
-  },
-  {
-    name: "Event Planning",
-    filter: "event planning",
-    icon: "🎉",
-  },
+  // {
+  //   name: "Negotiation",
+  //   filter: "negotiation",
+  //   icon: "🤝",
+  // },
+  // {
+  //   name: "Event Planning",
+  //   filter: "event planning",
+  //   icon: "🎉",
+  // },
   // {
   //   name: "Cooking",
   //   filter: "cooking",
@@ -114,11 +119,7 @@ export const CATEGORIES: Category[] = [
   //   filter: "project-management",
   //   icon: "📊",
   // },
-  // {
-  //   name: "Exercise",
-  //   filter: "exercise",
-  //   icon: "🏋️",
-  // },
+
   // {
   //   name: "Gaming",
   //   filter: "gaming",
