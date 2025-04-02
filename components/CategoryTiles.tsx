@@ -20,21 +20,6 @@ export const CATEGORIES: Category[] = [
     icon: "🎨",
   },
   {
-    name: "Productivity",
-    filter: "productivity",
-    icon: "⏰",
-  },
-  {
-    name: "Email Writing",
-    filter: "email",
-    icon: "✉️",
-  },
-  // {
-  //   name: "Coding",
-  //   filter: "coding",
-  //   icon: "💻",
-  // },
-  {
     name: "Resume Building",
     filter: "resume",
     icon: "📄",
@@ -44,6 +29,21 @@ export const CATEGORIES: Category[] = [
     filter: "interview",
     icon: "🎤",
   },
+  {
+    name: "Email Writing",
+    filter: "email",
+    icon: "✉️",
+  },
+  {
+    name: "Productivity",
+    filter: "productivity",
+    icon: "⏰",
+  },
+  // {
+  //   name: "Coding",
+  //   filter: "coding",
+  //   icon: "💻",
+  // },
   {
     name: "Writing",
     filter: "writing",

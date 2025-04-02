@@ -45,12 +45,12 @@ export default function SubmitPromptForm({
       // Convert categories string to array
       const categoriesArray = categories
         .split(",")
-        .map((category) => category.trim())
+        .map((category) => category.trim().toLowerCase())
         .filter((category) => category.length > 0);
 
       const tagsArray = tags
         .split(",")
-        .map((tag) => tag.trim())
+        .map((tag) => tag.trim().toLowerCase())
         .filter((tag) => tag.length > 0);
 
       const outputPreviewArray = outputPreview
