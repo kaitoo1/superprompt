@@ -1,17 +1,17 @@
 import { memo } from "react";
 
-type TagPillProps = {
-  tag: string;
+type CategoryPillProps = {
+  category: string;
 };
 
-const TagPill = memo(({ tag }: TagPillProps) => {
+const CategoryPill = memo(({ category }: CategoryPillProps) => {
   return (
     <span className="px-3 bg-zinc-800 rounded-full text-xs text-zinc-400 flex items-center gap-2 h-6 whitespace-nowrap capitalize">
-      {tag}
+      {category}
     </span>
   );
 });
 
-TagPill.displayName = "TagPill";
+CategoryPill.displayName = "CategoryPill";
 
-export default TagPill;
+export default CategoryPill;

@@ -9,9 +9,9 @@ import DecoratedPrompt from "./DecoratedPrompt";
 import { useRouter } from "next/navigation";
 import LeftArrowIcon from "./icons/LeftArrowIcon";
 import StarIcon from "./icons/StarIcon";
-import TagPill from "./TagPill";
 import { copyTextToClipboard } from "@/lib/clipboard";
 import CustomMarkdown from "./CustomMarkdown";
+import CategoryPill from "./CategoryPill";
 
 interface PromptDetailProps {
   prompt: Prompt;
@@ -90,7 +90,9 @@ const PromptDetail = memo(({ prompt: initialPrompt }: PromptDetailProps) => {
 
       <div className="bg-zinc-900 rounded-lg flex flex-col space-y-4 p-6 pb-2 mb-6">
         <h2 className="text-2xl font-bold">{prompt.title}</h2>
-        <p className="text-zinc-400 mb-6">{prompt.description}</p>
+        <p className="text-zinc-400 mb-6 whitespace-pre-wrap">
+          {prompt.description}
+        </p>
         {prompt.source && (
           <div className="flex flex-row space-x-1 mb-4">
             <p className="text-zinc-400   font-italic">Idea from</p>
@@ -150,11 +152,11 @@ const PromptDetail = memo(({ prompt: initialPrompt }: PromptDetailProps) => {
 
         {/* Responsive layout for actions */}
         <div className="flex flex-col space-y-4">
-          {/* Favorites and Tags - always on top row */}
+          {/* Favorites and Categories - always on top row */}
           <div className="flex flex-1 space-x-2 h-6">
             <div className="flex flex-1 gap-2 overflow-x-auto pb-1 hide-scrollbar">
-              {prompt.tags.map((tag, index) => (
-                <TagPill key={index} tag={tag} />
+              {prompt.categories.map((category, index) => (
+                <CategoryPill key={index} category={category} />
               ))}
             </div>
             <div className="flex flex-row items-center space-x-1">

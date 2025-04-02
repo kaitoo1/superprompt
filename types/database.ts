@@ -6,6 +6,7 @@ export interface Prompt {
   ai_type: string;
   specific_tool: string | null;
   tags: string[];
+  categories: string[];
   user_id: string;
   upvotes: number;
   copy_count: number;

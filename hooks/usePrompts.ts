@@ -28,15 +28,12 @@ export const usePromptsData = (
         const lowerCaseFilter = activeFilter;
 
         // Use a raw SQL query with ILIKE for case-insensitive matching
-        // This checks if any element in the tags array contains our filter value
-        query = query.filter("tags", "cs", `{${lowerCaseFilter}}`);
-
-        // Alternative approach using PostgreSQL array functions:
-        // query = query.or(`array_to_string(tags, ',') ilike '%${lowerCaseFilter}%'`);
+        // This checks if any element in the categories array contains our filter value
+        query = query.filter("categories", "cs", `{${lowerCaseFilter}}`);
       }
 
       // Always order by favorites (descending)
-      const { data, error } = await query.order("favorite_count", {
+      const { data, error } = await query.order("score", {
         ascending: false,
       });
 

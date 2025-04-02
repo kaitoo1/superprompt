@@ -8,8 +8,8 @@ import { useUser } from "@/contexts/UserContext";
 import DecoratedPrompt from "./DecoratedPrompt";
 import CheckIcon from "./icons/CheckIcon";
 import StarIcon from "./icons/StarIcon";
-import TagPill from "./TagPill";
 import { copyTextToClipboard } from "@/lib/clipboard";
+import CategoryPill from "./CategoryPill";
 
 interface PromptCardProps {
   prompt: Prompt;
@@ -59,6 +59,8 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
   const limitPromptClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
   }, []);
+
+  console.log(prompt);
 
   return (
     <div
@@ -140,7 +142,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
         </div>
       )}
 
-      {/* Tags */}
+      {/* Categories */}
       <div className="flex flex-row justify-between items-center px-1 space-x-2 mt-3">
         <div
           className="flex flex-row space-x-2 overflow-x-auto pb-1 hide-scrollbar"
@@ -149,8 +151,8 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
             scrollbarWidth: "none",
           }}
         >
-          {prompt.tags?.map((tag, index) => (
-            <TagPill key={index} tag={tag} />
+          {prompt.categories?.map((category, index) => (
+            <CategoryPill key={index} category={category} />
           ))}
         </div>
 

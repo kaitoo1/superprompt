@@ -55,7 +55,10 @@ export default function SubmitPage() {
 
   return (
     <Layout>
-      <SubmitPromptForm onCancel={handleCancel} onSuccess={handleSuccess} />
+      <SubmitPromptForm
+        onCancelAction={handleCancel}
+        onSuccessAction={handleSuccess}
+      />
     </Layout>
   );
 }

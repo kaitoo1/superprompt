@@ -45,8 +45,8 @@ export const CATEGORIES: Category[] = [
     icon: "🎤",
   },
   {
-    name: "Writing Help",
-    filter: "writing help",
+    name: "Writing",
+    filter: "writing",
     icon: "✍️",
   },
   {

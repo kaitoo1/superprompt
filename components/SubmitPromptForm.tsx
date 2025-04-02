@@ -5,19 +5,20 @@ import { supabase } from "../lib/supabase";
 import { useUser } from "../contexts/UserContext";
 
 interface SubmitPromptFormProps {
-  onCancel: () => void;
-  onSuccess: () => void;
+  onCancelAction: () => void;
+  onSuccessAction: () => void;
 }
 
 export default function SubmitPromptForm({
-  onCancel,
-  onSuccess,
+  onCancelAction,
+  onSuccessAction,
 }: SubmitPromptFormProps) {
   const { user } = useUser();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [promptText, setPromptText] = useState("");
   const [outputPreview, setOutputPreview] = useState("");
+  const [categories, setCategories] = useState("");
   const [tags, setTags] = useState("");
   const [aiType, setAiType] = useState("General LLM");
   const [specificTool, setSpecificTool] = useState("");
@@ -41,7 +42,12 @@ export default function SubmitPromptForm({
       setIsSubmitting(true);
       setError(null);
 
-      // Convert tags string to array
+      // Convert categories string to array
+      const categoriesArray = categories
+        .split(",")
+        .map((category) => category.trim())
+        .filter((category) => category.length > 0);
+
       const tagsArray = tags
         .split(",")
         .map((tag) => tag.trim())
@@ -49,13 +55,14 @@ export default function SubmitPromptForm({
 
       const outputPreviewArray = outputPreview
         .split(",")
-        .map((tag) => tag.trim())
-        .filter((tag) => tag.length > 0);
+        .map((url) => url.trim())
+        .filter((url) => url.length > 0);
 
       const { error: submitError } = await supabase.from("prompts").insert({
         title,
         description,
         prompt: promptText,
+        categories: categoriesArray,
         tags: tagsArray,
         ai_type: aiType,
         specific_tool: specificTool || null,
@@ -71,11 +78,12 @@ export default function SubmitPromptForm({
       setTitle("");
       setDescription("");
       setPromptText("");
+      setCategories("");
       setTags("");
       setAiType("General LLM");
       setSpecificTool("");
 
-      onSuccess();
+      onSuccessAction();
     } catch (err) {
       console.error("Error submitting prompt:", err);
       setError("Failed to submit prompt. Please try again.");
@@ -121,19 +129,16 @@ export default function SubmitPromptForm({
           >
             Description <span className="text-red-500">*</span>
           </label>
-          <input
+          <textarea
             id="description"
-            type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            maxLength={300}
             className="w-full py-2 px-3 bg-zinc-800 rounded-md text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="e.g., A prompt to help you become your best self"
             required
+            rows={8}
+            maxLength={5000}
           />
-          <p className="text-xs text-zinc-400 mt-1">
-            {description.length}/300 characters
-          </p>
         </div>
 
         <div>
@@ -172,6 +177,25 @@ export default function SubmitPromptForm({
           </p>
         </div>
 
+        <div>
+          <label
+            htmlFor="categories"
+            className="block text-sm font-medium mb-2"
+          >
+            Categories
+          </label>
+          <input
+            id="categories"
+            type="text"
+            value={categories}
+            onChange={(e) => setCategories(e.target.value)}
+            className="w-full py-2 px-3 bg-zinc-800 rounded-md text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="e.g., Education, Coaching (comma-separated)"
+          />
+          <p className="text-xs text-zinc-400 mt-1">
+            Separate categories with commas
+          </p>
+        </div>
         <div>
           <label htmlFor="tags" className="block text-sm font-medium mb-2">
             Tags
@@ -228,7 +252,7 @@ export default function SubmitPromptForm({
         <div className="flex justify-end space-x-4 pt-4">
           <button
             type="button"
-            onClick={onCancel}
+            onClick={onCancelAction}
             className="px-4 py-2 rounded-md bg-zinc-700 hover:bg-zinc-600 transition-colors"
             disabled={isSubmitting}
           >
