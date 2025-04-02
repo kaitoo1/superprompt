@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.superprompt.tips
+
+# Sitemaps
+Sitemap: https://www.superprompt.tips/sitemap.xml
