@@ -5,6 +5,7 @@ import { UserProvider } from "../contexts/UserContext";
 import ClientLayout from "./client-layout";
 import { PromptsProvider } from "@/contexts/PromptsContext";
 import { Analytics } from "@vercel/analytics/react";
+import FeedbackButton from "@/components/FeedbackButton";
 
 import { Inter } from "next/font/google";
 
@@ -63,6 +64,7 @@ export default function RootLayout({
           </ClientLayout>
         </UserProvider>
         <Analytics />
+        <FeedbackButton />
       </body>
     </html>
   );
