@@ -74,6 +74,16 @@ export const CATEGORIES: Category[] = [
     filter: "language",
     icon: "🗣️",
   },
+  {
+    name: "Business",
+    filter: "business",
+    icon: "💼",
+  },
+  {
+    name: "Therapy",
+    filter: "therapy",
+    icon: "🧘",
+  },
   // {
   //   name: "Negotiation",
   //   filter: "negotiation",
