@@ -15,8 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SuperPrompt",
-  description: "Find the best prompts for ChatGPT, Grok, and more.",
+  title: "SuperPrompt - Best AI Prompts",
+  description:
+    "Get better results from ChatGPT, Grok, and more using expertly crafted prompts.",
   keywords: [
     "ChatGPT prompts",
     "how to use ChatGPT",
