@@ -1,7 +1,7 @@
 import { memo } from "react";
 import ReactMarkdown from "react-markdown";
 
-const CustomMarkdown = memo(({ children }: { children: string }) => {
+const PromptDetailMarkdown = memo(({ children }: { children: string }) => {
   return (
     <ReactMarkdown
       components={{
@@ -19,6 +19,6 @@ const CustomMarkdown = memo(({ children }: { children: string }) => {
     </ReactMarkdown>
   );
 });
-CustomMarkdown.displayName = "CustomMarcaown";
+PromptDetailMarkdown.displayName = "CustomMarcaown";
 
-export default CustomMarkdown;
+export default PromptDetailMarkdown;

@@ -1,4 +1,3 @@
-import Layout from "@/components/HomePage";
 import PromptDetail from "@/components/PromptDetail";
 import { getPrompt } from "@/lib/promptCache";
 import { Prompt } from "@/types/database";
@@ -42,17 +41,11 @@ export default async function PromptPage({ params }: Props) {
 
   if (!prompt) {
     return (
-      <Layout>
-        <div className="text-center py-12 text-red-400">
-          <p>Prompt not found</p>
-        </div>
-      </Layout>
+      <div className="text-center py-12 text-red-400">
+        <p>Prompt not found</p>
+      </div>
     );
   }
 
-  return (
-    <Layout>
-      <PromptDetail prompt={prompt} />
-    </Layout>
-  );
+  return <PromptDetail prompt={prompt} />;
 }

@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useUser } from "../../contexts/UserContext";
-import Layout from "../../components/HomePage";
 import SubmitPromptForm from "../../components/SubmitPromptForm";
 import { useEffect } from "react";
 
@@ -32,12 +31,10 @@ export default function SubmitPage() {
   // Show nothing while checking auth status
   if (loading) {
     return (
-      <Layout>
-        <div className="text-center py-12">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-500 border-r-transparent"></div>
-          <p className="mt-4">Loading...</p>
-        </div>
-      </Layout>
+      <div className="text-center py-12">
+        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-500 border-r-transparent"></div>
+        <p className="mt-4">Loading...</p>
+      </div>
     );
   }
 
@@ -45,20 +42,16 @@ export default function SubmitPage() {
   // This will only briefly show before redirect happens
   if (!user || user.id !== AUTHORIZED_USER_ID) {
     return (
-      <Layout>
-        <div className="text-center py-12">
-          <p className="text-red-400">Access denied.</p>
-        </div>
-      </Layout>
+      <div className="text-center py-12">
+        <p className="text-red-400">Access denied.</p>
+      </div>
     );
   }
 
   return (
-    <Layout>
-      <SubmitPromptForm
-        onCancelAction={handleCancel}
-        onSuccessAction={handleSuccess}
-      />
-    </Layout>
+    <SubmitPromptForm
+      onCancelAction={handleCancel}
+      onSuccessAction={handleSuccess}
+    />
   );
 }

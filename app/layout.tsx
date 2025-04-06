@@ -6,6 +6,7 @@ import ClientLayout from "./client-layout";
 import { PromptsProvider } from "@/contexts/PromptsContext";
 import { Analytics } from "@vercel/analytics/react";
 import FeedbackButton from "@/components/FeedbackButton";
+import Header from "@/components/Header";
 
 import { Inter } from "next/font/google";
 
@@ -58,10 +59,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${inter.className} antialiased bg-black`}>
+      <body
+        className={`${inter.className} antialiased bg-black min-h-screen text-white`}
+      >
+        <Header />
         <UserProvider>
           <ClientLayout>
-            <PromptsProvider>{children}</PromptsProvider>
+            <PromptsProvider>
+              <main className="container mx-auto py-8 px-4">{children}</main>
+            </PromptsProvider>
           </ClientLayout>
         </UserProvider>
         <Analytics />

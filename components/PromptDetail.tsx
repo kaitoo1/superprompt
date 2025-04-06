@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import LeftArrowIcon from "./icons/LeftArrowIcon";
 import StarIcon from "./icons/StarIcon";
 import { copyTextToClipboard } from "@/lib/clipboard";
-import CustomMarkdown from "./CustomMarkdown";
+import PromptDetailMarkdown from "./Markdown/PromptDetailMarkdown";
 import CategoryPill from "./CategoryPill";
 
 interface PromptDetailProps {
@@ -96,7 +96,7 @@ const PromptDetail = memo(({ prompt: initialPrompt }: PromptDetailProps) => {
         {prompt.source && (
           <div className="flex flex-row space-x-1 mb-4">
             <p className="text-zinc-400   font-italic">Idea from</p>
-            <CustomMarkdown>{prompt.source}</CustomMarkdown>
+            <PromptDetailMarkdown>{prompt.source}</PromptDetailMarkdown>
           </div>
         )}
         {hasOutputPreview && (
