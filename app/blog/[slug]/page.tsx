@@ -9,7 +9,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = posts.find((p) => p.slug === params.slug);
+  const awaitedParams = await params;
+  const post = posts.find((p) => p.slug === awaitedParams.slug);
 
   if (!post) {
     return {
@@ -26,12 +27,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.content.replace(/[#*_`\n]/g, "").slice(0, 160),
       type: "article",
       publishedTime: post.date,
+      url: `https://www.superprompt.tips/blog/${post.slug}`,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "SuperPrompt",
+        },
+      ],
     },
   };
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = posts.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const awaitedParams = await params;
+  const post = posts.find((p) => p.slug === awaitedParams.slug);
 
   if (!post) return notFound();
 
