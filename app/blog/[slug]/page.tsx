@@ -5,7 +5,9 @@ import BlogMarkdown from "@/components/Markdown/BlogMarkdown";
 import { Metadata } from "next";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{
+    slug: string;
+  }>; // Updated type to reflect that params is a Promise
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
