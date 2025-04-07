@@ -62,8 +62,8 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased bg-black min-h-screen text-white`}
       >
-        <Header />
         <UserProvider>
+          <Header />
           <ClientLayout>
             <PromptsProvider>
               <main className="container mx-auto py-8 px-4">{children}</main>
