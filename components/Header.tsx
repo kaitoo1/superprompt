@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <header className="py-4 px-6">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center flex-col sm:flex-row">
         <Link href="/" className="text-2xl font-bold tracking-wide">
           SUPERPROMPT
         </Link>
