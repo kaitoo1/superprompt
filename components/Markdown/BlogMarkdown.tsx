@@ -14,13 +14,13 @@ const BlogMarkdown = memo(({ children }: { children: string }) => {
         ),
         h2: ({ ...props }) => (
           <h2
-            className="text-3xl font-semibold mt-6 mb-3 text-zinc-800 dark:text-white"
+            className="text-2xl font-semibold mt-12 mb-3 text-zinc-800 dark:text-white"
             {...props}
           />
         ),
         h3: ({ ...props }) => (
           <h3
-            className="text-2xl font-medium mt-6 mb-4 text-zinc-800 dark:text-white"
+            className="text-xl font-bold mt-12 mb-4 text-zinc-800 dark:text-white"
             {...props}
           />
         ),
