@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) return notFound();
 
   return (
-    <main className="text-white">
+    <main className="">
       <div className="mb-8">
         <Link
           href="/blog"

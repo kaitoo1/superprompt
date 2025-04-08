@@ -59,9 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} antialiased bg-black min-h-screen text-white`}
-      >
+      <body className={`${inter.className} antialiased  min-h-screen `}>
         <UserProvider>
           <Header />
           <ClientLayout>
