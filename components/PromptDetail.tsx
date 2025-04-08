@@ -82,15 +82,15 @@ const PromptDetail = memo(({ prompt: initialPrompt }: PromptDetailProps) => {
       <div className="hidden sm:flex mb-6  items-center">
         <button
           onClick={handleBack}
-          className="hover:cursor-pointer mr-3 p-2 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors"
+          className="hover:cursor-pointer mr-3 p-2 rounded-full bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-400 dark:hover:bg-zinc-700 transition-colors"
         >
           <LeftArrowIcon />
         </button>
       </div>
 
-      <div className="bg-zinc-900 rounded-lg flex flex-col space-y-4 p-6 pb-2 mb-6">
+      <div className="bg-zinc-100 dark:bg-zinc-900 rounded-lg flex flex-col space-y-4 p-6 pb-2 mb-6 shadow-lg">
         <h2 className="text-2xl font-bold">{prompt.title}</h2>
-        <p className="text-zinc-400 mb-6 whitespace-pre-wrap">
+        <p className="text-zinc-500 dark:text-zinc-400 mb-6 whitespace-pre-wrap">
           {prompt.description}
         </p>
         {prompt.source && (
@@ -130,7 +130,7 @@ const PromptDetail = memo(({ prompt: initialPrompt }: PromptDetailProps) => {
           <DecoratedPrompt prompt={prompt.prompt} displayMode="full" />
           <button
             onClick={handleCopy}
-            className="absolute bottom-2 right-2 px-4 py-2 rounded-md bg-green-700 hover:from-blue-600 hover:to-purple-600 text-white flex-1 sm:w-40 justify-center transition-all flex items-center gap-2 shadow-md"
+            className="absolute bottom-2 right-2 px-4 py-2 rounded-md bg-[#0000FF] text-white flex-1 sm:w-40 justify-center transition-all flex items-center gap-2 shadow-md"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@ const PromptDetail = memo(({ prompt: initialPrompt }: PromptDetailProps) => {
           <div className="flex flex-row space-x-2 sm:justify-end w-full sm:w-auto">
             <button
               onClick={handleShare}
-              className="px-4 py-2 max-w-50 rounded-md bg-zinc-700 hover:cursor-pointer hover:bg-zinc-600 transition-colors flex-1 sm:w-40 justify-center flex items-center gap-2"
+              className="px-4 py-2 max-w-50 rounded-md bg-zinc-200 dark:bg-zinc-700 hover:cursor-pointer hover:bg-zinc-400 dark:hover:bg-zinc-600 transition-colors flex-1 sm:w-40 justify-center flex items-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

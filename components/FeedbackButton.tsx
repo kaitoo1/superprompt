@@ -8,7 +8,7 @@ const FeedbackButton: React.FC = memo(() => {
       href="https://forms.gle/9cfy2nmMic2QyNZTA"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-4 right-4 z-50 flex items-center space-x-2 px-4 py-2 text-white shadow-lg transition-all duration-500 bg-gradient-to-r from-[#134E5E]  to-[#4DB495]  hover:bg-right-center rounded-full"
+      className="fixed bottom-4 right-4 z-50 flex items-center space-x-2 px-4 py-2 text-white dark:text-white bg-[#0000FF] text-black shadow-lg transition-all duration-500 dark:bg-gradient-to-r from-[#134E5E] to-[#4DB495] hover:bg-right-center rounded-full"
       style={{
         backgroundSize: "200% auto",
       }}

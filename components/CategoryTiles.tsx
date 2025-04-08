@@ -228,9 +228,9 @@ const CategoryTiles: React.FC = () => {
             isDisabled
               ? "bg-zinc-800/50 border-zinc-700/50 cursor-default opacity-70"
               : isActive
-              ? `bg-zinc-500/20 border-zinc-500 border border-2
-                )}/50 text-zinc-300`
-              : "bg-zinc-900 hover:bg-zinc-700  hover:border-zinc-600"
+              ? `bg-zinc-300 dark:bg-zinc-500/20 border-zinc-500 border border-2
+                )}/50 `
+              : "dark:bg-zinc-900 bg-zinc-200 hover:bg-zinc-400  dark:hover:border-zinc-600 "
           }`}
           // bg-gradient-to-r from-[#1E221F] to-[#616B64]
         >
@@ -246,7 +246,9 @@ const CategoryTiles: React.FC = () => {
           <div className="flex flex-col items-start sm:items-center">
             <span
               className={`text-xs sm:text-sm font-medium ${
-                isActive && !isDisabled ? "text-white" : "text-zinc-200"
+                isActive && !isDisabled
+                  ? "text-zinc-800 dark:text-white"
+                  : "text-zinc-700 dark:text-zinc-300"
               }`}
             >
               {category.name}
@@ -266,10 +268,10 @@ const CategoryTiles: React.FC = () => {
   return (
     <div className="mb-10">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-white">Explore categories</h2>
+        <h2 className="text-xl font-semibold ">Explore categories</h2>
         <button
           onClick={toggleExpand}
-          className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+          className="text-sm text-[#0000FF] dark:text-blue-400 hover:text-blue-300 transition-colors"
         >
           {expanded ? "View less ↑" : "View more ↓"}
         </button>

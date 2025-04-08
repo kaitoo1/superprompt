@@ -104,7 +104,7 @@ const PromptsGrid = memo(({ prompts, isLoading }: Props) => {
       {/* Found 1 prompt for "searchQuery" */}
       {searchQuery && prompts.length > 0 && (
         <div className="mb-6 flex justify-between items-center">
-          <p className="text-zinc-300">
+          <p className="text-zinc-500 dark:text-zinc-300">
             {`Found ${prompts.length} prompt${
               prompts.length === 1 ? "" : "s"
             } for "${searchQuery}"`}
@@ -113,7 +113,7 @@ const PromptsGrid = memo(({ prompts, isLoading }: Props) => {
       )}
 
       {searchQuery && prompts.length === 0 && (
-        <div className="text-center py-12 text-zinc-400">
+        <div className="text-center py-12 text-zinc-500 dark:text-zinc-300">
           No matching prompts found. Try a different search term.
         </div>
       )}

@@ -24,7 +24,7 @@ const SearchBar: React.FC = () => {
         <input
           type="text"
           placeholder="What do you want to do?"
-          className="w-full py-4 px-4 sm:py-5 sm:px-8 bg-zinc-900 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg shadow-lg"
+          className="w-full py-4 px-4 sm:py-5 sm:px-8 rounded-xl  placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg shadow-lg  dark:bg-zinc-900 bg-zinc-200 "
           value={searchQuery}
           onChange={handleInputChange}
         />

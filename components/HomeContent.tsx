@@ -65,7 +65,7 @@ export default function HomeContent() {
         </Suspense>
       )}
       {!searchQuery && (
-        <h2 className="text-xl font-semibold mb-6 text-white capitalize">
+        <h2 className="text-xl font-semibold mb-6  capitalize">
           {headingText}
         </h2>
       )}

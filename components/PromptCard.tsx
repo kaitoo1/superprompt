@@ -64,7 +64,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
 
   return (
     <div
-      className="bg-zinc-900 rounded-lg px-6 py-6 cursor-pointer hover:bg-zinc-700 transition-colors h-full flex flex-col"
+      className="bg-zinc-100 dark:bg-zinc-900 rounded-lg px-6 py-6 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors h-full flex flex-col shadow-lg"
       onClick={handleCardClick}
     >
       <div className="flex flex-col space-y-2 px-1">
@@ -75,7 +75,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
           }`}
         >
           <p
-            className={`text-zinc-400 text-sm ${
+            className={`text-zinc-500 dark:text-zinc-400 text-sm ${
               hasOutputPreview ? "line-clamp-3" : "line-clamp-4"
             }`}
           >
@@ -117,7 +117,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
 
           <button
             onClick={handleCopy}
-            className="absolute bottom-3 right-3 p-1.5 bg-zinc-700 rounded-md hover:bg-zinc-600 transition-colors"
+            className="absolute bottom-3 right-3 p-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-600 transition-colors"
             title="Copy prompt"
           >
             {isCopied ? (
@@ -159,7 +159,7 @@ const PromptCard = memo(({ prompt }: PromptCardProps) => {
         <div className="flex flex-row items-center space-x-1">
           <button
             onClick={handleToggleFavorite}
-            className="cursor:pointer-text-zinc-400 hover:text-yellow-400 transition-colors"
+            className="text-zinc-500 cursor:pointer-text-zinc-400 dark:text-zinc-400 hover:text-yellow-400 transition-colors"
             title={
               prompt.is_favorited ? "Remove from favorites" : "Add to favorites"
             }

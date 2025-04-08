@@ -45,17 +45,22 @@ export default function SignInModal({ onCloseAction }: SignInModalProps) {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className="fixed inset-0 flex items-center justify-center z-50"
+      style={{
+        backgroundColor: document.documentElement.classList.contains("dark")
+          ? "rgba(0, 0, 0, 0.5)"
+          : "rgba(200, 200, 205, 0.8)",
+      }}
       onClick={clickOutside}
     >
-      <div className="bg-zinc-800 p-8 rounded-lg max-w-md w-full relative">
+      <div className="bg-zinc-100 dark:bg-zinc-800 p-8 rounded-lg max-w-md w-full relative">
         <button
           onClick={onCloseAction}
           className="absolute top-4 right-4 text-zinc-400 hover:text-white"
         >
           ✕
         </button>
-        <h2 className="text-xl font-bold mb-6 text-center text-white">
+        <h2 className="text-xl font-bold mb-6 text-center ">
           Sign In to favorite prompts
         </h2>
 
