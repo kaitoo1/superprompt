@@ -35,8 +35,9 @@ module.exports = {
     ];
 
     const blogSlugs = [
-      "ai-for-beginners-5-mistakes-to-avoid-with-chatgpt-2025",
+      "5-prompt-mistakes-killing-your-chatgpt-results",
       "telltale-signs-text-written-by-ai",
+      "instantly-improve-your-prompts-with-one-line",
     ];
     const now = new Date().toISOString();
     const promptPaths = promptSlugs.map((slug) => ({

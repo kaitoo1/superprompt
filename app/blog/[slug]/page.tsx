@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: Props) {
       </div>
 
       <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">
-        {new Date(post.date).toLocaleDateString()} - 5 min read
+        {new Date(post.date).toLocaleDateString()}
       </p>
       <h1 className="text-4xl font-bold mb-8">{post.title}</h1>
 
