@@ -58,6 +58,14 @@ export default function HomeContent() {
 
   return (
     <>
+      <div className="flex flex-col items-center justify-center space-y-1 mb-4 text-center">
+        <h1 className="text-2xl font-semibold ">
+          Curated prompts that get you better results from AI
+        </h1>
+        <p className="text-lg text-gray-500">
+          Just copy and paste into your AI tool like ChatGPT.
+        </p>
+      </div>
       <SearchBar />
       {!searchQuery && (
         <Suspense fallback={<div>Loading...</div>}>
