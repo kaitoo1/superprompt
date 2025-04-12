@@ -18,6 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.superprompt.tips"),
   title: "SuperPrompt - Best AI Prompts",
   description:
     "Get better results from ChatGPT, Grok, and more using expertly crafted prompts.",

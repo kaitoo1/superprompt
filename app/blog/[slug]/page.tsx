@@ -4,6 +4,12 @@ import Link from "next/link";
 import BlogMarkdown from "@/components/Markdown/BlogMarkdown";
 import { Metadata } from "next";
 
+export async function generateStaticParams() {
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 type Props = {
   params: Promise<{
     slug: string;
