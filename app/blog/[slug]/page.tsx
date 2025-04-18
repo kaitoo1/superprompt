@@ -15,9 +15,9 @@ export async function generateStaticParams() {
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 const POSTS_DIR = path.join(process.cwd(), "data/posts");
@@ -59,7 +59,8 @@ async function getPost(slug: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const awaitedParams = await params;
+  const post = await getPost(awaitedParams.slug);
   if (!post) {
     return {
       title: "Post Not Found",
@@ -91,7 +92,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const post = await getPost(params.slug);
+  const awaitedParams = await params;
+  const post = await getPost(awaitedParams.slug);
   if (!post) return notFound();
 
   return (
