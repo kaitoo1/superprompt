@@ -148,9 +148,7 @@ This helps even if your original prompt is messy or incomplete.
 
 ## 🚀 What you can actually use AI for
 
-Now you understand how prompts work and how to write them well.
-
-What can you actually do with them?
+So what can you actually do with prompts?
 
 ### A few ways people use it every day:
 
