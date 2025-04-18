@@ -2,7 +2,11 @@ import posts from "@/data/blogPosts.json";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import BlogMarkdown from "@/components/Markdown/BlogMarkdown";
+
 import { Metadata } from "next";
+import fs from "fs";
+import path from "path";
+import TableOfContents, { TOCItem } from "../TableOfContents";
 
 export async function generateStaticParams() {
   return posts.map((post) => ({
@@ -11,28 +15,66 @@ export async function generateStaticParams() {
 }
 
 type Props = {
-  params: Promise<{
+  params: {
     slug: string;
-  }>; // Updated type to reflect that params is a Promise
+  };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const awaitedParams = await params;
-  const post = posts.find((p) => p.slug === awaitedParams.slug);
+const POSTS_DIR = path.join(process.cwd(), "data/posts");
 
+function extractHeadings(markdown: string): TOCItem[] {
+  return markdown
+    .split("\n")
+    .filter((line) => /^(##) /.test(line)) // ✅ allows only h2 and h3
+    .map((line) => {
+      const level = line.startsWith("### ") ? 3 : 2;
+      const rawText = line.replace(/^#+\s*/, "").trim();
+      const id = rawText
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+      return { id, text: rawText, level };
+    });
+}
+
+async function getPost(slug: string) {
+  const post = posts.find((p) => p.slug === slug);
+  if (!post) return null;
+
+  const filePath = path.join(POSTS_DIR, post.file || `${slug}.md`);
+  let content = "";
+
+  try {
+    content = fs.readFileSync(filePath, "utf8");
+  } catch (err) {
+    console.error(`Error reading markdown for slug "${slug}"`, err);
+    return null;
+  }
+
+  return {
+    ...post,
+    content,
+    headings: extractHeadings(content),
+  };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPost(params.slug);
   if (!post) {
     return {
       title: "Post Not Found",
     };
   }
 
+  const plainText = post.content.replace(/[#*_`\n]/g, "").slice(0, 160);
+
   return {
     title: `${post.title} | SuperPrompt Blog`,
-    description: post.content.replace(/[#*_`\n]/g, "").slice(0, 160),
+    description: plainText,
     keywords: post.keywords || [],
     openGraph: {
       title: post.title,
-      description: post.content.replace(/[#*_`\n]/g, "").slice(0, 160),
+      description: plainText,
       type: "article",
       publishedTime: post.date,
       url: `https://www.superprompt.tips/blog/${post.slug}`,
@@ -49,13 +91,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const awaitedParams = await params;
-  const post = posts.find((p) => p.slug === awaitedParams.slug);
-
+  const post = await getPost(params.slug);
   if (!post) return notFound();
 
   return (
-    <main className="dark:text-white text-black">
+    <main className="dark:text-white text-black relative">
+      {post.showTableOfContents && <TableOfContents headings={post.headings} />}
+
       <div className="mb-8">
         <Link
           href="/blog"

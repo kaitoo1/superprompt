@@ -17,7 +17,7 @@ export default function BlogListPage() {
             {post.title}
           </Link>
           <p className="text-zinc-500 dark:text-zinc-400 mt-2 line-clamp-2">
-            {post.content.replace(/[#*_`\n]/g, "").slice(0, 100)}...
+            {post.preview}
           </p>
         </div>
       ))}

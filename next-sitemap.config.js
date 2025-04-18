@@ -38,6 +38,7 @@ module.exports = {
       "5-prompt-mistakes-killing-your-chatgpt-results",
       "telltale-signs-text-written-by-ai",
       "instantly-improve-your-prompts-with-one-line",
+      "practical-guide-use-ai-well",
     ];
     const now = new Date().toISOString();
     const promptPaths = promptSlugs.map((slug) => ({
