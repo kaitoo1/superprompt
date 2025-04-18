@@ -308,7 +308,7 @@ Splitting up tasks makes it easier to ensure that you’re properly communicatin
 
 <aside>
 
-Note: AI is evolving quickly and a big development happening now is “agents”. Agents are essentially an automated version of these workflows. Instead of handling a task, they’re made to handle a series of tasks and make decisions about next steps.
+Note: AI is evolving quickly and trending towards “agents”. Agents are essentially an automated version of these workflows. Instead of handling a task, they handle a series of tasks and decide next steps.
 
 They’re still in early stages of usefulness but I’m sure over the next few months we’ll see more agents that handle whole workflows well for you. Then you won’t need to manually manage these steps.
 
